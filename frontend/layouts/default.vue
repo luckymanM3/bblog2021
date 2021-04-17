@@ -1,5 +1,6 @@
 <template>
   <div>
+    <CookieDisclosure />
     <header class="flex flex-row items-center h-12 ml-8 sticky top-0">
       <div class="w-8 flex flex-grow">
         <svg
@@ -51,7 +52,7 @@
             d="M188.462,398.892l-75.388-75.372c-4.156-4.173-4.156-10.922,0-15.078  c4.171-4.172,10.921-4.172,15.077,0l75.389,75.388c4.155,4.156,4.155,10.906,0,15.063  C199.384,403.064,192.634,403.064,188.462,398.892z"
           />
         </svg>
-        <div class="ml-2 font-bold">BB</div>
+        <div class="ml-2 font-bold">B Blog</div>
       </div>
 
       <nav>
@@ -63,16 +64,21 @@
           >
             <router-link
               class="uk-modal-close"
-              :to="{ name: 'categories-id', params: { id: category.id } }"
+              :to="{ name: '', params: { id: category.id } }"
               tag="a"
             >
+              {{ category.name }}
             </router-link>
           </li>
         </ul>
       </nav>
     </header>
+
+    <!-- <div v-for="(ad, i) in ads" :key="i">
+      <div>{{ ads }}}</div>
+    </div> -->
     <main class="mx-8 mb-8">
-      <h1 class="text-6xl mt-32 mb-20 font-bold uppercase">Balalaika Blog</h1>
+      <h1 class="text-6xl mt-32 mb-20 font-bold uppercase">B Blog</h1>
       <Nuxt />
     </main>
 
@@ -93,11 +99,18 @@
 
 <script>
 import categoriesQuery from "~/apollo/queries/category/categories";
+// import adsQuery from "~/apollo/queries/ad/ads";
+import CookieDisclosure from "~/components/CookieDisclosure";
 
 export default {
+  components: {
+    CookieDisclosure
+  },
+
   data() {
     return {
-      categories: []
+      categories: [],
+      ads: []
     };
   },
   apollo: {
@@ -105,6 +118,10 @@ export default {
       prefetch: true,
       query: categoriesQuery
     }
+    // ads: {
+    //   prefetch: true,
+    //   query: adsQuery
+    // }
   }
 };
 </script>

@@ -4,21 +4,30 @@
       <div
         class="h-full mr-24 border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden"
       >
-        <img
+        <!-- <img
           class="lg:h-48 md:h-36 w-full object-cover object-center"
           :src="api_url + articleList[0].image.url"
           alt="balalaika"
-        />
+        /> -->
+
+        <video class="w-full" autoplay playsinline muted loop>
+          <source :src="api_url + articleList[0].image.url" type="" />
+          The video element is not supported by your browser.
+        </video>
         <div class="p-6">
           <h2
             class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1 uppercase"
-          ></h2>
+          >
+            {{ articleList[0].category.name }}
+          </h2>
           <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
-            {{ articleList[0].title }}
+            {{ articleTitle(articleList[0].title) }}
           </h1>
-          <p class="leading-relaxed mb-3">
-            {{ articleList[0].content }}
-          </p>
+          <p
+            class="leading-relaxed mb-3"
+            v-if="articleList[0].content"
+            v-html="$md.render(articleList[0].content)"
+          ></p>
           <div class="flex items-center flex-wrap ">
             <a class="text-yellow-500 inline-flex items-center md:mb-2 lg:mb-0"
               >Learn More
@@ -87,13 +96,14 @@
             <div class="p-6">
               <h2
                 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1 uppercase"
-              ></h2>
+              >
+                {{ article.category.name }}
+              </h2>
               <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
                 {{ article.title }}
               </h1>
               <p class="leading-relaxed mb-3">
-                Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-                microdosing tousled waistcoat.
+                {{ article.content }}
               </p>
               <div class="flex items-center flex-wrap ">
                 <a
@@ -171,6 +181,12 @@ export default {
   computed: {
     articleList() {
       return this.articles;
+    }
+  },
+
+  methods: {
+    articleTitle(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     }
   }
 };

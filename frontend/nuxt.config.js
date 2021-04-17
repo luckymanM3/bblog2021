@@ -39,13 +39,20 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/apollo"],
+  modules: ["@nuxtjs/apollo", "@nuxtjs/markdownit"],
   apollo: {
     clientConfigs: {
       default: {
         httpEndpoint: process.env.BACKEND_URL || "http://localhost:1337/graphql"
       }
     }
+  },
+  markdownit: {
+    preset: "default",
+    linkify: true,
+    breaks: true,
+    injected: true,
+    runtime: true
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

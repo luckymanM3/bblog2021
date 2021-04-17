@@ -1,0 +1,21 @@
+query Ads {
+  ads {
+    title
+    description
+    # AdZone {
+    #   ... on ComponentAdsImage {
+    #     caption
+    #     image {
+    #       url
+    #     }
+    #   }
+    #   ... on ComponentAdsQuote {
+    #     quote
+    #     quoter
+    #   }
+    #   ... on ComponentAdsRichText {
+    #     richText
+    #   }
+    # }
+  }
+}
