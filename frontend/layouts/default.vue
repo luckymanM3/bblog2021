@@ -65,7 +65,6 @@
             <router-link
               class="uk-modal-close"
               :to="{ name: '', params: { id: category.id } }"
-              tag="a"
             >
               {{ category.name }}
             </router-link>

@@ -10,7 +10,7 @@
     />
 
     <video v-else class="w-full" autoplay playsinline muted loop>
-      <source :src="api_url + article.image.url" type="" />
+      <source :src="api_url + article.image.url" />
       The video element is not supported by your browser.
     </video>
 
@@ -21,12 +21,12 @@
         {{ article.category.name }}
       </h2>
 
-      <h1
+      <h3
         :dir="direction"
         class="title-font text-lg font-medium text-gray-900 mb-3"
       >
         {{ articleTitle(article.title) }}
-      </h1>
+      </h3>
 
       <p class="leading-relaxed mb-3">
         {{ article.content }}
