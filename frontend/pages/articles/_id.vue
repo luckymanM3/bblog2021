@@ -1,6 +1,6 @@
 <template>
   <section v-if="isArticle">
-    <Article :article="article" />
+    <Article :article="article" class="xl:w-6/12 xl:mx-auto" />
   </section>
 </template>
 
@@ -26,6 +26,10 @@ export default {
         return { id: this.$route.params.id };
       }
     }
+  },
+
+  validate({ params, query, store }) {
+    return true;
   },
 
   computed: {

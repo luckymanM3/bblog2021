@@ -13,6 +13,16 @@
       <source :src="api_url + article.image.url" />
       The video element is not supported by your browser.
     </video>
+    <!-- 
+    <button
+      class="border border-white capitalize font-bold inline-flex items-center px-7 py-3 select-none text-xl relative"
+      @click="openShare"
+    >
+      Share
+      <transition name="share">
+        <Share v-if="isVisible" @hide="closeShare" />
+      </transition>
+    </button> -->
 
     <div class="p-6">
       <h2
@@ -32,7 +42,7 @@
         {{ article.content }}
       </p>
 
-      <!-- linlk -->
+      <!-- linlks -->
       <div class="flex items-center flex-wrap ">
         <router-link
           v-if="this.$route.path === '/'"
@@ -68,6 +78,7 @@
             <circle cx="12" cy="12" r="3"></circle></svg
           >1.2K
         </span>
+
         <span
           class="text-gray-400 inline-flex items-center leading-none text-sm"
         >
@@ -85,34 +96,90 @@
             ></path></svg
           >6
         </span>
+
+        <!-- share -->
+        <span
+          v-if="isHomePage"
+          class="text-gray-400 inline-flex items-center leading-none text-sm ml-2 pl-3 py-1 border-l-2 border-gray-200 cursor-pointer relative"
+          @click="openShare"
+        >
+          <transition name="share">
+            <Share v-if="isVisible" @hide="closeShare" />
+          </transition>
+          <svg
+            class="w-4 h-4 mr-1"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M18 8a3 3 0 100-6 3 3 0 000 6zM6 15a3 3 0 100-6 3 3 0 000 6zM18 22a3 3 0 100-6 3 3 0 000 6zM8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
       </div>
     </div>
   </article>
 </template>
 
 <script>
+import Share from "~/components/Share";
 export default {
   name: "Article",
+
+  components: {
+    Share
+  },
+
   props: {
     article: Object
   },
 
   data() {
     return {
-      api_url: process.env.strapiBaseUri
+      api_url: process.env.strapiBaseUri,
+      isVisible: false
     };
   },
 
   computed: {
     direction() {
       return this.article.category.name === "featured" ? "rtl" : "ltr";
+    },
+    isHomePage() {
+      return this.$route.path !== "/";
     }
   },
 
   methods: {
     articleTitle(str) {
       return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    },
+
+    openShare() {
+      this.isVisible = true;
+    },
+    closeShare() {
+      this.isVisible = false;
     }
   }
 };
 </script>
+
+<style scoped>
+.share-enter-active,
+.share-leave-active {
+  transition: opacity 0.5s;
+}
+.share-enter,
+.share-leave-to {
+  opacity: 0;
+}
+</style>

@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <CookieDisclosure />
+  <div class="flex flex-col min-h-screen">
     <header class="flex flex-row items-center h-12 ml-8 sticky top-0">
       <div class="w-8 flex flex-grow">
         <svg
@@ -55,6 +54,28 @@
         <div class="ml-2 font-bold">B Blog</div>
       </div>
 
+      <div class="uk-navbar-right">
+        <ul class="uk-navbar-nav" v-if="username">
+          <li>
+            <a href="#" class="uk-link-reset"
+              ><img
+                src="https://png2.cleanpng.com/sh/a7adacc7226d2dc438dafb37913a8ab8/L0KzQYm3V8E2N5tqipH0aYP2gLBuTfVudZZ5ReZxZT3vdbj2Tf1wfppqRehyZHXyd7L0hb1xeppze9d8cz34frryigR1gV58Rdd2bXX3Pb3shB8udZD7gdc2NXK3coG9UMRibGJrfqI3Mkm0RoS7VMYyPWQ2TqY8M0m5R4GCUb5xdpg=/kisspng-emmet-the-lego-movie-videogame-princess-unikitty-w-emmet-lego-movie-5b4b0604ad1ff0.2916344615316433967091.png"
+                class="uk-border-circle"
+                height="40"
+                width="40"
+                alt=""
+              />{{ username }}</a
+            >
+          </li>
+          <li><a href="#" @click="logout">Logout</a></li>
+        </ul>
+
+        <ul v-else class="flex flex-row mr-14 uppercase">
+          <li><a href="/users/signin" class="mr-8">Signin</a></li>
+          <li><a href="/users/register">Signup</a></li>
+        </ul>
+      </div>
+
       <nav>
         <ul class="flex flex-row">
           <li
@@ -76,34 +97,108 @@
     <!-- <div v-for="(ad, i) in ads" :key="i">
       <div>{{ ads }}}</div>
     </div> -->
-    <main class="mx-8 mb-8">
+    <main class="flex flex-col flex-grow mx-8 mb-20 h-full">
       <h1 class="text-6xl mt-32 mb-20 font-bold uppercase">B Blog</h1>
       <Nuxt />
     </main>
 
-    <footer class="flex justify-center items-center h-12 ml-8">
-      <div class="styles_legals__oZBy1">
-        <ul class="styles_subLinks__KmUXH">
-          <li
-            class="typography_Text__21fWd styles_subLink__2wvm- typography_smaller__2CuhM themes_gray__rNovr"
+    <Cookies />
+
+    <footer class="text-gray-600 body-font w-full">
+      <div class="bg-gray-100">
+        <div
+          class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row"
+        >
+          <p class="text-gray-500 text-sm text-center sm:text-left">
+            © 2021 Volchenok —
+            <a
+              href="https://twitter.com/knyttneve"
+              rel="noopener noreferrer"
+              class="text-gray-600 ml-1"
+              target="_blank"
+              >@volchenok</a
+            >
+          </p>
+          <span
+            class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start"
           >
-            ©
-            <!-- -->2021<!-- -->, Igor Volchenok
-          </li>
-        </ul>
+            <a class="text-gray-500">
+              <svg
+                fill="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                class="w-5 h-5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
+                ></path>
+              </svg>
+            </a>
+            <a class="ml-3 text-gray-500">
+              <svg
+                fill="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                class="w-5 h-5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"
+                ></path>
+              </svg>
+            </a>
+            <a class="ml-3 text-gray-500">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                class="w-5 h-5"
+                viewBox="0 0 24 24"
+              >
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"
+                ></path>
+              </svg>
+            </a>
+            <a class="ml-3 text-gray-500">
+              <svg
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="0"
+                class="w-5 h-5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="none"
+                  d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
+                ></path>
+                <circle cx="4" cy="4" r="2" stroke="none"></circle>
+              </svg>
+            </a>
+          </span>
+        </div>
       </div>
     </footer>
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import categoriesQuery from "~/apollo/queries/category/categories";
 // import adsQuery from "~/apollo/queries/ad/ads";
-import CookieDisclosure from "~/components/CookieDisclosure";
+import Cookies from "~/components/Cookies";
 
 export default {
   components: {
-    CookieDisclosure
+    Cookies
   },
 
   data() {
@@ -121,56 +216,26 @@ export default {
     //   prefetch: true,
     //   query: adsQuery
     // }
+  },
+
+  computed: {
+    // Set your username thanks to your getter
+    username() {
+      return this.$store.getters["auth/username"];
+    }
+  },
+
+  methods: {
+    // Define your needed mutations, here: auth/logout
+    ...mapMutations({
+      logout: "auth/logout"
+    })
   }
 };
 </script>
 
 <style>
-html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+body {
+  @apply bg-white;
 }
 </style>

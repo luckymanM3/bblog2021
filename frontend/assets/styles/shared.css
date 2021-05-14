@@ -1,0 +1,14 @@
+.button {
+  @apply text-base;
+  @apply font-bold;
+  @apply text-white;
+  @apply capitalize;
+  @apply py-3;
+  @apply px-6;
+  @apply max-w-max;
+}
+
+.button-outlined {
+  @apply border;
+  @apply border-white;
+}

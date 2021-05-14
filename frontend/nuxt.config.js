@@ -3,7 +3,6 @@ export default {
     strapiBaseUri: process.env.API_URL || "http://localhost:1337"
   },
 
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "balalaika",
     htmlAttrs: {
@@ -23,23 +22,19 @@ export default {
     ]
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ["~/assets/styles/shared.css"],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: "@/plugins/click-outside", mode: "client" }],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     "@nuxtjs/tailwindcss"
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxtjs/apollo", "@nuxtjs/markdownit"],
+
   apollo: {
     clientConfigs: {
       default: {
@@ -55,10 +50,21 @@ export default {
     runtime: true
   },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
+  loadingIndicator: {
+    name: "chasing-dots",
+    color: "purple",
+    background: "green"
+  },
+
+  // loading: {
+  //   color: "blue",
+  //   height: "55px"
+  // },
+
   build: {
     extend(config, ctx) {} // blah blah
   },
+
   server: {
     host: "0.0.0.0"
   }
